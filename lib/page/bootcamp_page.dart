@@ -48,7 +48,14 @@ class _BootcampPageState extends State<BootcampPage> {
             IconButton(
               icon: Icon(Icons.add),
               onPressed: () async {
-                await Navigator.of(context).pushNamed(AppRoutes.BOOTCAMP_FORM);
+                await Navigator.of(context).pushNamed(AppRoutes.BOOTCAMP_FORM,
+                    arguments: Bootcamp(
+                        nomeEmpresa: '',
+                        candidatosMax: 0,
+                        descricao: '',
+                        especialidade: '',
+                        localizacao: '',
+                        nome: ''));
                 refreshNotes();
               },
             ),
@@ -60,16 +67,15 @@ class _BootcampPageState extends State<BootcampPage> {
                 ? CircularProgressIndicator()
                 : bootcamps.isEmpty
                     ? Text(
-                        'No Notes',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                        'Nenhum bootcamp cadastrado ainda :(',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black, fontSize: 20),
                       )
                     : ListView.builder(
                         itemCount: bootcamps.length,
                         itemBuilder: (cxt, i) =>
                             BootcampTileWidget(bootcamps[i]),
-                      )
-            // buildBootcamps(),
-            ),
+                      )),
       );
 
 //   Widget buildNotes() => StaggeredGridView.countBuilder(
